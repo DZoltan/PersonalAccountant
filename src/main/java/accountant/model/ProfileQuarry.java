@@ -19,7 +19,6 @@ public class ProfileQuarry {
     }
 
     public String Enrcyptor(String password, int CryptNum ){
-        //TODO: Ceaser titkosító, ami titkosítja a megadott passwordot(Create és login használja)
         StringBuilder CryptedPass = new StringBuilder();
         for(int i = 0; i < password.length(); i++){
             int NumOfChar = password.charAt(i);
