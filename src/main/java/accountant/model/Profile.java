@@ -1,21 +1,15 @@
 package accountant.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Profile {
     public int id;
     String userName;
     int balance;
-
-    public Profile(int id, String userName, int balance) {
-        this.id = id;
-        this.balance = balance;
-        this.userName = userName;
-    }
-
-    public Profile(){
-
-    }
 
 }
