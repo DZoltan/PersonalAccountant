@@ -1,52 +1,80 @@
 package accountant.model;
 
+import accountant.model.DAO.ProfileDAO;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.sqlobject.Handler;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
-import java.util.Optional;
+import java.sql.SQLOutput;
+import java.util.NoSuchElementException;
 
 public class ProfileQuarry{
-    public int id = 1;
+    public int id = 0;
 
-     Jdbi jdbi = Jdbi.create("jdbc:h2:mem:test");
+     Jdbi jdbi = Jdbi.create("jdbc:sqlite:test.db");
+
 
     public boolean checkProfiles ()  {
-    //TODO: Adatbázis ellenőrzése, hogy van e már profil létrehozva
-    return false;
+    try(Handle handle = jdbi.open()){
+        ProfileDAO dao = handle.attach(ProfileDAO.class);
+        if(dao.listProfile().size() !=0){
+            return true;
+        }
+        else return false;
+    }
     }
 
     public void CreateProfile (String username, String password){
     jdbi.installPlugin(new SqlObjectPlugin());
-    String Encrypted = Enrcyptor(password, id);
-    Profile new_profile = new Profile(id, username, 0);
+
 
     //TODO: Megadott username-t és a titkosítótt jelszót az adatbáztisba küldi (encryptor)
 
     try ( Handle handle = jdbi.open()){
         ProfileDAO dao = handle.attach(ProfileDAO.class);
-        dao.createProfileTable();
-        dao.createPasswordTable();
+        id = dao.listProfile().size() + 1;
+        String Encrypted = Enrcyptor(password, id);
+        Profile new_profile = new Profile(id, username, 0);
         dao.insertNewProfile(new_profile.getId(), new_profile.getUserName(), new_profile.getBalance());
         dao.insertNewPassword(id, Encrypted);
-        dao.testProfile().forEach(System.out::println);
     }
     }
 
     public void test_method(){
         try ( Handle handle = jdbi.open()){
             ProfileDAO dao = handle.attach(ProfileDAO.class);
-            dao.testProfile().forEach(System.out::println);
+            dao.listProfile().forEach(System.out::println);
         }
     }
 
-    public void LoginProfile (String username, String password){
+    public void loginProfile (String username, String password){
+    jdbi.installPlugin(new SqlObjectPlugin());
+
     int balance = 0;
-    String Encrypted = Enrcyptor(password, id);
+    int profile_id = 0;
+    String EncryptedPasswordFromDb = "";
 
-    //TODO: A felhasználó nevet és a megadott jelszót(enrypted) kéri le az adatbázisból
-
-    Profile used_profile = new Profile(id, username, balance);
+    try(Handle handle = jdbi.open()){
+        ProfileDAO dao = handle.attach(ProfileDAO.class);
+        profile_id = Integer.parseInt(dao.getIdForLogin(username).orElseThrow());
+        EncryptedPasswordFromDb = dao.getPasswordForLogin(profile_id).orElseThrow();
+    }
+    catch(NoSuchElementException e){
+        System.out.println("A felhasználónév nem található");
+    }
+    catch (Exception e ){
+        System.out.println("Something went wrong.... _@_/'");
+    }
+    if(EncryptedPasswordFromDb != "") {
+        String Encrypted = Enrcyptor(password, profile_id);
+        if (EncryptedPasswordFromDb.contentEquals(Encrypted)) {
+            Profile used_profile = new Profile(id, username, balance);
+            System.out.println("Helló, " + username);
+        } else {
+            System.out.println("A jelszó nem egyezik!");
+        }
+    }
     }
 
 

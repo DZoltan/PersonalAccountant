@@ -1,5 +1,6 @@
-package accountant.model;
+package accountant.model.DAO;
 
+import accountant.model.Profile;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
@@ -34,9 +35,12 @@ public interface ProfileDAO {
     @SqlUpdate("INSERT INTO Passwords VALUES (:profile_id, :password)")
     void insertNewPassword(@Bind("profile_id") int id, @Bind("password") String password);
 
-    @SqlQuery("SELECT password FROM Passwords WHERE profile_id = : profile_id")
-    Optional<String> login(@Bind("profile_id") int id);
+    @SqlQuery("SELECT password FROM Passwords WHERE profile_id = :profile_id")
+    Optional<String> getPasswordForLogin(@Bind("profile_id") int id);
+
+    @SqlQuery("SELECT id FROM Profiles WHERE username = :username")
+    Optional<String> getIdForLogin(@Bind("username") String username);
 
     @SqlQuery("SELECT * FROM Profiles ORDER BY id")
-    List<Profile> testProfile();
+    List<Profile> listProfile();
 }

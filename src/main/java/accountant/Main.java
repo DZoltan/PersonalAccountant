@@ -8,7 +8,9 @@ public class Main {
     public static void main(String[] args) {
 
         ProfileQuarry test = new ProfileQuarry();
-        test.CreateProfile("Bela", "alma");
+        test.loginProfile("Bela", "alma");
+        test.loginProfile("Bela", "körte");
+        test.loginProfile("Álmos", "alma");
         //test.test_method();
     }
 }

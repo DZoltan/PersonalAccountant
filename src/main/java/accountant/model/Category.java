@@ -5,13 +5,14 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Categories {
+public class Category {
 
     String CategoryName;
     boolean InOut;
     public int id;
+    int profile_id;
 
-    public Categories(int id){
+    public Category(int id){
         this.id = id;
     }
 }
