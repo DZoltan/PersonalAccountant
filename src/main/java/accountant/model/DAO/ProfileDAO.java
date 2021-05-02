@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface ProfileDAO {
 
     @SqlUpdate("""
-            CREATE TABLE Profiles (
+            CREATE TABLE IF NOT EXISTS Profiles (
             id INTEGER PRIMARY KEY,
             username VARCHAR NOT NULL,
             balance INTEGER NOT NULL)
@@ -22,7 +22,7 @@ public interface ProfileDAO {
     void createProfileTable();
 
     @SqlUpdate("""
-            CREATE TABLE Passwords (
+            CREATE TABLE IF NOT EXISTS Passwords (
             profile_id INTEGER PRIMARY KEY,
             password VARCHAR NOT NULL)
             

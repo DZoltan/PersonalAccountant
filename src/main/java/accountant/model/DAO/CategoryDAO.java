@@ -1,7 +1,9 @@
 package accountant.model.DAO;
 
 import accountant.model.Category;
+import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
+import org.jdbi.v3.sqlobject.statement.MapTo;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
@@ -11,23 +13,31 @@ import java.util.Optional;
 public interface CategoryDAO {
 
     @SqlUpdate("""
-            CREATE TABLE Category (
+           CREATE TABLE IF NOT EXISTS Category (
             id INTEGER PRIMARY KEY,
+            in_out BOOLEAN,
             category_name VARCHAR NOT NULL,
-            profile INTEGER NOT NULL,
-            in_out BOOLEAN)
+            profile_id INTEGER NOT NULL
+            )
             """)
     void createCategoryTable();
 
-    @SqlUpdate("INSERT INTO Category VALUES (:id, :category_name, :profile, :in_out)")
-    void insertNewCategory(@Bind("id") int id, @Bind("category_name") String category_name, @Bind("profile") int profile_id, @Bind("in_out") boolean in_out);
+    @SqlUpdate("INSERT INTO Category VALUES (:id, :in_out, :category_name, :profile_id)")
+    void insertNewCategory(@Bind("id") int id, @Bind("category_name") String category_name, @Bind("profile_id") int profile_id, @Bind("in_out") boolean in_out);
 
-    @SqlUpdate("UPDATE Category SET (category_name = :category_name, in_out = :in_out) WHERE (id = :id)")
+    @SqlUpdate("UPDATE Category SET category_name = :category_name, in_out = :in_out WHERE (id = :id)")
     void updateCategory(@Bind("id") int id, @Bind("category_name") String category_name, @Bind("in_out") boolean in_out);
 
-    @SqlQuery("SELECT category_name FROM Category WHERE(id = :id)")
-    Optional<String> searchCategory(@Bind("id") int id);
+    @SqlUpdate("DELETE FROM Category WHERE(id = :id)")
+    void deleteCategory(@Bind("id") int id);
 
-    @SqlQuery("SELECT * FROM Category")
-    List<Category> listAllCategory(@Bind("id") int id);
+    @SqlUpdate("DELETE FROM Category")
+    void deleteAllCategory();
+
+    @SqlQuery("SELECT category_name FROM Category WHERE(category_name = :category_name)")
+    Optional<String> searchCategory(@Bind("category_name") String category_name);
+
+    @SqlQuery("SELECT * FROM Category ORDER BY id")
+    @RegisterBeanMapper(Category.class)
+    List<Category> listAllCategory();
 }

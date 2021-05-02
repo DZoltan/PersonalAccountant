@@ -12,51 +12,59 @@ import java.util.NoSuchElementException;
 public class ProfileQuarry{
     public int id = 0;
 
-     Jdbi jdbi = Jdbi.create("jdbc:sqlite:test.db");
+     Jdbi jdbi = Jdbi.create("jdbc:sqlite:test.db")
+             .installPlugin(new SqlObjectPlugin());
+
+     Handle handle = jdbi.open();
+     ProfileDAO dao = handle.attach(ProfileDAO.class);
+
+     public ProfileQuarry() {
+         try {
+            dao.createProfileTable();
+            dao.createPasswordTable();
+         } catch (Exception e) {
+             System.out.println(e);
+         }
+     }
 
 
-    public boolean checkProfiles ()  {
-    try(Handle handle = jdbi.open()){
-        ProfileDAO dao = handle.attach(ProfileDAO.class);
+    public boolean checkProfiles() {
         if(dao.listProfile().size() !=0){
             return true;
         }
         else return false;
     }
-    }
 
     public void CreateProfile (String username, String password){
-    jdbi.installPlugin(new SqlObjectPlugin());
 
-
-    //TODO: Megadott username-t és a titkosítótt jelszót az adatbáztisba küldi (encryptor)
-
-    try ( Handle handle = jdbi.open()){
-        ProfileDAO dao = handle.attach(ProfileDAO.class);
+    try {
         id = dao.listProfile().size() + 1;
         String Encrypted = Enrcyptor(password, id);
         Profile new_profile = new Profile(id, username, 0);
         dao.insertNewProfile(new_profile.getId(), new_profile.getUserName(), new_profile.getBalance());
         dao.insertNewPassword(id, Encrypted);
     }
+    catch (Exception e){
+        System.out.println(e);
+    }
     }
 
     public void test_method(){
-        try ( Handle handle = jdbi.open()){
-            ProfileDAO dao = handle.attach(ProfileDAO.class);
+        try{
             dao.listProfile().forEach(System.out::println);
+        }
+        catch (Exception e){
+            System.out.println(e);
         }
     }
 
     public void loginProfile (String username, String password){
-    jdbi.installPlugin(new SqlObjectPlugin());
 
     int balance = 0;
     int profile_id = 0;
     String EncryptedPasswordFromDb = "";
 
-    try(Handle handle = jdbi.open()){
-        ProfileDAO dao = handle.attach(ProfileDAO.class);
+    try{
         profile_id = Integer.parseInt(dao.getIdForLogin(username).orElseThrow());
         EncryptedPasswordFromDb = dao.getPasswordForLogin(profile_id).orElseThrow();
     }
@@ -64,7 +72,7 @@ public class ProfileQuarry{
         System.out.println("A felhasználónév nem található");
     }
     catch (Exception e ){
-        System.out.println("Something went wrong.... _@_/'");
+        System.out.println("Something went wrong.... _@_/' " + e );
     }
     if(EncryptedPasswordFromDb != "") {
         String Encrypted = Enrcyptor(password, profile_id);

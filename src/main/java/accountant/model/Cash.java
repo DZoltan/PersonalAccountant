@@ -8,9 +8,8 @@ import java.util.Date;
 public class Cash {
 
     public int cashId;
-    int amount;
-    boolean inOut;
-    int category;
+    int money;
+    int category_id;
     Date date;
     String description;
 
