@@ -21,10 +21,11 @@ public class CategoryHandler {
         }
     }
 
-    public void setNewCategory(boolean inOut, String name){
+    public void setNewCategory(boolean inOut, String name, int profile_id){
+
         try {
             int id = dao.listAllCategory().size();
-            dao.insertNewCategory(id, name, 1,inOut);
+            dao.insertNewCategory(new Category(id, inOut, name,profile_id));
         }
         catch (Exception e){
             System.out.println(e);

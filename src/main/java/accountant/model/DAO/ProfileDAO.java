@@ -30,7 +30,7 @@ public interface ProfileDAO {
     void createPasswordTable();
 
     @SqlUpdate("INSERT INTO Profiles VALUES (:id, :username, :balance)")
-    void insertNewProfile(@Bind("id") int id, @Bind("username") String username, @Bind("balance") int balance);
+    void insertNewProfile(@BindBean Profile profile);
 
     @SqlUpdate("INSERT INTO Passwords VALUES (:profile_id, :password)")
     void insertNewPassword(@Bind("profile_id") int id, @Bind("password") String password);

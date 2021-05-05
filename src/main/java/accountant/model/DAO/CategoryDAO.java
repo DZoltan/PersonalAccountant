@@ -3,13 +3,14 @@ package accountant.model.DAO;
 import accountant.model.Category;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
+import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.MapTo;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.util.List;
 import java.util.Optional;
-
+@RegisterBeanMapper(Category.class)
 public interface CategoryDAO {
 
     @SqlUpdate("""
@@ -23,7 +24,7 @@ public interface CategoryDAO {
     void createCategoryTable();
 
     @SqlUpdate("INSERT INTO Category VALUES (:id, :in_out, :category_name, :profile_id)")
-    void insertNewCategory(@Bind("id") int id, @Bind("category_name") String category_name, @Bind("profile_id") int profile_id, @Bind("in_out") boolean in_out);
+    void insertNewCategory(@BindBean Category category);
 
     @SqlUpdate("UPDATE Category SET category_name = :category_name, in_out = :in_out WHERE (id = :id)")
     void updateCategory(@Bind("id") int id, @Bind("category_name") String category_name, @Bind("in_out") boolean in_out);
@@ -38,6 +39,5 @@ public interface CategoryDAO {
     Optional<String> searchCategory(@Bind("category_name") String category_name);
 
     @SqlQuery("SELECT * FROM Category ORDER BY id")
-    @RegisterBeanMapper(Category.class)
     List<Category> listAllCategory();
 }

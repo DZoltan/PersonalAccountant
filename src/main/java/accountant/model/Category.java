@@ -11,13 +11,9 @@ import org.jdbi.v3.sqlobject.statement.MapTo;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category {
-    @ColumnName("id")
     public int id;
-    @ColumnName("in_out")
     boolean in_out;
-    @ColumnName("category_name")
     String category_name;
-    @ColumnName("profile_id")
     int profile_id;
 
     }

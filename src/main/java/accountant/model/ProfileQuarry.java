@@ -41,7 +41,7 @@ public class ProfileQuarry{
         id = dao.listProfile().size() + 1;
         String Encrypted = Enrcyptor(password, id);
         Profile new_profile = new Profile(id, username, 0);
-        dao.insertNewProfile(new_profile.getId(), new_profile.getUserName(), new_profile.getBalance());
+        dao.insertNewProfile(new_profile);
         dao.insertNewPassword(id, Encrypted);
     }
     catch (Exception e){
