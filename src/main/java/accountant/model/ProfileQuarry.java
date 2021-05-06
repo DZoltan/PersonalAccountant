@@ -58,8 +58,8 @@ public class ProfileQuarry{
         }
     }
 
-    public void loginProfile (String username, String password){
-
+    public boolean loginProfile (String username, String password){
+    System.out.println("Elérem a logint..");
     int balance = 0;
     int profile_id = 0;
     String EncryptedPasswordFromDb = "";
@@ -69,7 +69,7 @@ public class ProfileQuarry{
         EncryptedPasswordFromDb = dao.getPasswordForLogin(profile_id).orElseThrow();
     }
     catch(NoSuchElementException e){
-        System.out.println("A felhasználónév nem található");
+
     }
     catch (Exception e ){
         System.out.println("Something went wrong.... _@_/' " + e );
@@ -78,11 +78,13 @@ public class ProfileQuarry{
         String Encrypted = Enrcyptor(password, profile_id);
         if (EncryptedPasswordFromDb.contentEquals(Encrypted)) {
             Profile used_profile = new Profile(id, username, balance);
-            System.out.println("Helló, " + username);
+            return true;
         } else {
-            System.out.println("A jelszó nem egyezik!");
+            return false;
         }
     }
+
+    return false;
     }
 
 
