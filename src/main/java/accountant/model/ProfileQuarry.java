@@ -59,7 +59,6 @@ public class ProfileQuarry{
     }
 
     public boolean loginProfile (String username, String password){
-    System.out.println("Elérem a logint..");
     int balance = 0;
     int profile_id = 0;
     String EncryptedPasswordFromDb = "";

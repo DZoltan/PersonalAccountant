@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class AccountantStart extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxs/login.fxml"));
         stage.setTitle("Personal Accountant");
         stage.setScene(new Scene(root));
         stage.show();

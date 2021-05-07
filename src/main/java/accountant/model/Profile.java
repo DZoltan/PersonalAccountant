@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Profile {
     public int id;
-    String userName;
+    String username;
     int balance;
 
 }

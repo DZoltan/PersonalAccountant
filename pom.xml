@@ -12,6 +12,7 @@
         <maven.compiler.release>15</maven.compiler.release>
         <jackson-databind.version>2.12.1</jackson-databind.version>
         <exec.mainClass>accountant.Main</exec.mainClass>
+        <tinylog.version>2.2.1</tinylog.version>
     </properties>
     <dependencies>
         <dependency>
@@ -65,7 +66,18 @@
             <version>16</version>
             <scope>compile</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.tinylog</groupId>
+            <artifactId>tinylog-api</artifactId>
+            <version>${tinylog.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.tinylog</groupId>
+            <artifactId>tinylog-impl</artifactId>
+            <version>${tinylog.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
