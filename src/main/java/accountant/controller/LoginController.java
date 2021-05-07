@@ -85,4 +85,8 @@ public class LoginController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    public void test(ActionEvent event) {
+        System.out.println("teszt");
+    }
 }
