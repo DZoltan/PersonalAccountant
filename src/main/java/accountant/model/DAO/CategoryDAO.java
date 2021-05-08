@@ -1,6 +1,7 @@
 package accountant.model.DAO;
 
 import accountant.model.Category;
+import javafx.collections.ObservableList;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
@@ -40,4 +41,7 @@ public interface CategoryDAO {
 
     @SqlQuery("SELECT * FROM Category ORDER BY id")
     List<Category> listAllCategory();
+
+    @SqlQuery("SELECT * FROM Category WHERE ( profile_id = :profile_id) ORDER BY id")
+    List<Category> listProfileCategory(@Bind("profile_id") int profile_id);
 }

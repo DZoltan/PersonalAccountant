@@ -42,3 +42,115 @@ ERROR: zltnd : Bejelentkezési hiba!
 INFO: test Sikeresen bejelentkezett.
 2021-05-07 14:44:23 [JavaFX Application Thread] accountant.controller.MenuController.logout()
 INFO: test kijelentkezett.
+2021-05-07 21:01:40 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-07 21:02:59 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-07 21:06:30 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-07 21:09:29 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-07 21:35:53 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-07 21:37:04 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-07 21:46:44 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-07 21:48:03 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-07 21:48:58 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-07 21:54:04 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-07 21:54:09 [JavaFX Application Thread] accountant.controller.MenuController.logout()
+INFO: null kijelentkezett.
+2021-05-08 01:33:23 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 01:35:18 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 01:39:33 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 01:41:54 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 01:42:46 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 01:43:33 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 02:02:44 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 02:08:27 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 02:14:16 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 02:16:40 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 02:33:16 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 02:35:45 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 02:40:23 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 02:51:51 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 03:02:52 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 03:03:52 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 03:05:15 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 03:15:16 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 03:16:37 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 03:20:01 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 03:41:24 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 03:42:01 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:45:15 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:47:15 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:48:46 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:49:04 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:49:45 [JavaFX Application Thread] accountant.controller.LoginController.registration()
+INFO: testplusz Sikeresen regisztrált.
+2021-05-08 04:50:03 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: testplusz Sikeresen bejelentkezett.
+2021-05-08 04:50:53 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:52:20 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:53:05 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:53:35 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:54:43 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:55:12 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:56:09 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:56:59 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 04:57:39 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 05:00:40 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 05:00:59 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 05:02:30 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 05:03:21 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 05:35:21 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 05:36:08 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 05:36:55 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 05:37:45 [JavaFX Application Thread] accountant.controller.MenuController.logout()
+INFO: test kijelentkezett.

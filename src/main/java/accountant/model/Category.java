@@ -16,4 +16,10 @@ public class Category {
     String category_name;
     int profile_id;
 
+    public String getData(){
+        String inOut = "";
+        if(in_out) inOut="bevétel";
+        else inOut="kiadás";
+       return "ID: " + this.id + "\t\t" + inOut + "\t\t" + category_name;
+    }
     }

@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
 
 public class ProfileQuarry{
     public int id = 0;
+    public Profile profile = new Profile();
 
      Jdbi jdbi = Jdbi.create("jdbc:sqlite:test.db")
              .installPlugin(new SqlObjectPlugin());
@@ -76,7 +77,8 @@ public class ProfileQuarry{
     if(EncryptedPasswordFromDb != "") {
         String Encrypted = Enrcyptor(password, profile_id);
         if (EncryptedPasswordFromDb.contentEquals(Encrypted)) {
-            Profile used_profile = new Profile(id, username, balance);
+            Profile used_profile = new Profile(profile_id, username, balance);
+            profile = used_profile;
             return true;
         } else {
             return false;
@@ -84,6 +86,10 @@ public class ProfileQuarry{
     }
 
     return false;
+    }
+
+    public Profile getProfileFromId(int id){
+         return dao.getProfileFromID(id).orElseThrow();
     }
 
 

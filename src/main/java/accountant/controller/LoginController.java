@@ -81,7 +81,8 @@ public class LoginController {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/fxs/menu.fxml"));
         Parent root = fxmlLoader.load();
         MenuController menu = fxmlLoader.<MenuController>getController();
-        menu.username = username.getText();
+        menu.profile = profile.profile;
+        menu.setWelcome_txt();
         stage.setScene(new Scene(root));
         stage.show();
     }

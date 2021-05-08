@@ -5,6 +5,8 @@ import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
+import java.util.List;
+
 public class CategoryHandler {
 
     Jdbi jdbi = Jdbi.create("jdbc:sqlite:test.db")
@@ -47,6 +49,14 @@ public class CategoryHandler {
         catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    public List<Category> selectAll(){
+        return dao.listAllCategory();
+    }
+
+    public List<Category> selectOwnCategory(int id){
+        return  dao.listProfileCategory(id);
     }
 
 

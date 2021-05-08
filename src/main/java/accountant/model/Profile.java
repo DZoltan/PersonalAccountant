@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Profile {
-    public int id;
+    int id;
     String username;
     int balance;
 

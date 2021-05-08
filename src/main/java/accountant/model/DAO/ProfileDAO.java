@@ -41,6 +41,9 @@ public interface ProfileDAO {
     @SqlQuery("SELECT id FROM Profiles WHERE username = :username")
     Optional<String> getIdForLogin(@Bind("username") String username);
 
+    @SqlQuery("SELECT * FROM Profiles WHERE id = :id")
+    Optional<Profile>getProfileFromID(@Bind("id") int id);
+
     @SqlQuery("SELECT * FROM Profiles ORDER BY id")
     List<Profile> listProfile();
 }
