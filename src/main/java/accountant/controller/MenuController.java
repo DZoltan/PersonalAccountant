@@ -47,8 +47,7 @@ public class MenuController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/fxs/category.fxml"));
         Parent root = fxmlLoader.load();
-        CategoryController category = fxmlLoader.<CategoryController>getController();
-        //System.out.println(profile.getId());
+        CategoryController category = fxmlLoader.<CategoryController>getController();;
         category.setOwnCategory(profile.getId());
         stage.setScene(new Scene(root));
         stage.show();
