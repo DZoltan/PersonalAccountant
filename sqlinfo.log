@@ -154,3 +154,9 @@ INFO: test Sikeresen bejelentkezett.
 INFO: test Sikeresen bejelentkezett.
 2021-05-08 05:37:45 [JavaFX Application Thread] accountant.controller.MenuController.logout()
 INFO: test kijelentkezett.
+2021-05-08 12:14:19 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 12:41:06 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.
+2021-05-08 12:42:25 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test Sikeresen bejelentkezett.

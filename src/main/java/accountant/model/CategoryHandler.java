@@ -26,7 +26,7 @@ public class CategoryHandler {
     public void setNewCategory(boolean inOut, String name, int profile_id){
 
         try {
-            int id = dao.listAllCategory().size();
+            int id = dao.listAllCategory().stream().mapToInt(Category::getId).max().orElseThrow() + 1;
             dao.insertNewCategory(new Category(id, inOut, name,profile_id));
         }
         catch (Exception e){
@@ -40,6 +40,10 @@ public class CategoryHandler {
 
     public void deleteAll(){
         dao.deleteAllCategory();
+    }
+
+    public void deleteCategory(int id){
+        dao.deleteCategory(id);
     }
 
     public void testCategory(){

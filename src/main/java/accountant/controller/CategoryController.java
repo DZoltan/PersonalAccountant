@@ -89,6 +89,9 @@ public class CategoryController {
             if (dialogButton == modifyButtonType) {
                 handler.updateCategory(category.getId(), categoryName.getText(), inOut.isSelected());
             }
+            else if(dialogButton == deleteButtonType){
+                handler.deleteCategory(category.getId());
+            }
             return null;
         });
 
