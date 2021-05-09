@@ -33,7 +33,7 @@
          <children>
             <Button mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="Profil" GridPane.rowIndex="0" />
             <Button mnemonicParsing="false" onAction="#category" prefHeight="Infinity" prefWidth="Infinity" text="Kategóriák"  GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="Pénzügyek" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#transaction" prefHeight="Infinity" prefWidth="Infinity" text="Pénzügyek" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="Előzmények" GridPane.rowIndex="3" />
             <Button mnemonicParsing="false" onAction="#logout" prefHeight="Infinity" prefWidth="Infinity" text="Kijelentkezés" GridPane.rowIndex="4" />
          </children>

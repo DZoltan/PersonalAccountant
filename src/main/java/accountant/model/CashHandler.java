@@ -39,6 +39,10 @@ public class CashHandler {
         return  dao.getAllTransactions();
     }
 
+    public List<Cash> getOwnTransaction(int profile_id){
+        return dao.getOwnTransactions(profile_id);
+    }
+
     public List<Cash> getInOutTransaction(boolean in_out){
         if(in_out){
             return dao.getInTransactions();

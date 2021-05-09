@@ -4,6 +4,7 @@ import accountant.model.DAO.CategoryDAO;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+import org.jdbi.v3.sqlobject.customizer.Bind;
 
 import java.util.List;
 
@@ -61,6 +62,14 @@ public class CategoryHandler {
 
     public List<Category> selectOwnCategory(int id){
         return  dao.listProfileCategory(id);
+    }
+
+    public String selectCategorybyId(int id){
+        return dao.searchCategorybyId(id).orElseThrow();
+    }
+
+    public int selectCategoryIdbyName(String name, int profile_id){
+        return Integer.parseInt(dao.searchCategoryIdbyName(name, profile_id).orElseThrow());
     }
 
 

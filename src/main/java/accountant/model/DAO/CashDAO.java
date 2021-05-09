@@ -31,6 +31,9 @@ public interface CashDAO {
     @SqlQuery("SELECT * FROM Cash ORDER BY date")
     List<Cash> getAllTransactions();
 
+    @SqlQuery("SELECT * FROM Cash WHERE profile_id = :profile_id ORDER BY date")
+    List<Cash> getOwnTransactions(@Bind("profile_id") int profile_id);
+
     @SqlQuery("SELECT * FROM Cash WHERE(money > 0) ORDER BY date")
     List<Cash> getInTransactions();
 

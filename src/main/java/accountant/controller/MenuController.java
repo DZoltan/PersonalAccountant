@@ -54,4 +54,13 @@ public class MenuController {
     }
 
 
+    public void transaction(ActionEvent event) throws IOException{
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/fxs/transaction.fxml"));
+        Parent root = fxmlLoader.load();
+        TransactionController transactionController = fxmlLoader.<TransactionController>getController();;
+        transactionController.initalize(profile.getId());
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }
