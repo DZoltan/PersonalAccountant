@@ -1,7 +1,7 @@
 package accountant;
 
+import accountant.model.CashHandler;
 import javafx.application.Application;
-
 
 public class Main {
 

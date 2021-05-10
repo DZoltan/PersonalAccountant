@@ -35,6 +35,9 @@ public interface ProfileDAO {
     @SqlUpdate("INSERT INTO Passwords VALUES (:profile_id, :password)")
     void insertNewPassword(@Bind("profile_id") int id, @Bind("password") String password);
 
+    @SqlUpdate("UPDATE Profiles SET balance = :balance WHERE (id = :id)")
+    void updateBalance(@Bind("id") int id, @Bind("balance") int balance);
+
     @SqlQuery("SELECT password FROM Passwords WHERE profile_id = :profile_id")
     Optional<String> getPasswordForLogin(@Bind("profile_id") int id);
 

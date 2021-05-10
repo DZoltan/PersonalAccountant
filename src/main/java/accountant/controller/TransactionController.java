@@ -5,11 +5,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.sql.Date;
+import java.util.Locale;
 
 public class TransactionController {
 
@@ -21,9 +29,6 @@ public class TransactionController {
 
     @FXML
     private ChoiceBox categorieList;
-
-    @FXML
-    private DatePicker selectedDate;
 
     @FXML
     private TextField summary;
@@ -44,19 +49,15 @@ public class TransactionController {
 
     private void setHistory(int profile_id) {
         ObservableList<String> TransactionHistory = FXCollections.observableArrayList();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate;
-        String dateString;
         for(int i = 0; i < cashHandler.getOwnTransaction(profile_id).size();i++){
             Cash historyCash = cashHandler.getOwnTransaction(profile_id).get(i);
 
-            dateString = format.format(historyCash.getDate());
             String category = categoryHandler.selectCategorybyId(historyCash.getCategory_id());
 
-            TransactionHistory.add(dateString + " " + category + " " + historyCash.getMoney() + " " + historyCash.getDescription() );
+            TransactionHistory.add(historyCash.getDate() + " " + category + " " + historyCash.getMoney() + " " + historyCash.getDescription() );
 
         }
-        categorieList.setItems(TransactionHistory);
+        history.setItems(TransactionHistory);
 
     }
 
@@ -73,14 +74,34 @@ public class TransactionController {
         //TODO: A CashID nak muszáj értéket adni, kell bele egy ág, ami üres tábla mellett vissza ad 0-t.
 
         Cash transaction = Cash.builder()
-                .cashId(cashHandler.getAllTransaction().stream().mapToInt(Cash::getCashId).max().orElseThrow())
+                .cashId(cashHandler.setCashId())
                 .category_id(categoryHandler.selectCategoryIdbyName(categorieList.getSelectionModel().getSelectedItem().toString(), profile_id ))
                 .description(description.getText())
                 .money(Integer.parseInt(summary.getText()))
-                .date(selectedDate.getValue())
+                .profile_id(profile_id)
                 .build();
 
         cashHandler.setNewTransaction(transaction);
         setHistory(profile_id);
+        calculateBalance();
+    }
+
+    private void calculateBalance() {
+        int balance = 0;
+        for(int i = 0; i< cashHandler.getOwnTransaction(profile_id).size(); i++){
+            balance += cashHandler.getOwnTransaction(profile_id).get(i).getMoney();
+        }
+        profileQuarry.updateBalance(profile_id, balance);
+    }
+
+    public void back(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/fxs/menu.fxml"));
+        Parent root = fxmlLoader.load();
+        MenuController menu = fxmlLoader.<MenuController>getController();
+        menu.profile = profileQuarry.getProfileFromId(profile_id);
+        menu.setWelcome_txt();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

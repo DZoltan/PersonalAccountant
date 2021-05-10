@@ -7,7 +7,7 @@ import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @RegisterBeanMapper(Cash.class)
@@ -19,14 +19,17 @@ public interface CashDAO {
                 profile_id INTEGER,
                 money INTEGER,
                 category_id INTEGER,
-                date DATE,
-                description VARCHAR
+                description VARCHAR,
+                date DATE
             )
             """)
     void createCashTable();
 
-    @SqlUpdate("INSERT INTO Cash VALUES(:cash_id, :profile_id :money, :category_id, :date, :description)")
-    void insertCash(@BindBean Cash cash);
+    /*@SqlUpdate("INSERT INTO Cash VALUES (:cash_id, :profile_id :money, :category_id, 'alma')")
+    void insertCash(@BindBean Cash cash);*/
+
+    @SqlUpdate("INSERT INTO Cash VALUES (:cash_id, :profile_id, :money, :category_id, :description, date(\"now\"))")
+    void insertCash(@Bind("cash_id") int cash_id,@Bind("profile_id") int profile_id,@Bind("money") int money, @Bind("category_id") int category_id, @Bind("description") String description);
 
     @SqlQuery("SELECT * FROM Cash ORDER BY date")
     List<Cash> getAllTransactions();

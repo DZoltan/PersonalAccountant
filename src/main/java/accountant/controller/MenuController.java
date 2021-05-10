@@ -1,5 +1,6 @@
 package accountant.controller;
 
+import accountant.model.CashHandler;
 import accountant.model.Category;
 import accountant.model.Profile;
 import javafx.collections.FXCollections;
@@ -28,7 +29,8 @@ public class MenuController {
     private Text welcome_txt;
 
     public void setWelcome_txt(){
-        welcome_txt.setText("Üdvözlünk, " + profile.getUsername());
+
+        welcome_txt.setText("Üdvözlünk, " + profile.getUsername() + "\t\t" + "Egyenleg : " + profile.getBalance());
 
     }
 

@@ -50,13 +50,8 @@ public class ProfileQuarry{
     }
     }
 
-    public void test_method(){
-        try{
-            dao.listProfile().forEach(System.out::println);
-        }
-        catch (Exception e){
-            System.out.println(e);
-        }
+    public void updateBalance(int id, int balance){
+         dao.updateBalance(id,balance);
     }
 
     public boolean loginProfile (String username, String password){
