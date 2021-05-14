@@ -1,36 +1,59 @@
 package accountant.controller;
 
-import accountant.model.CashHandler;
-import accountant.model.Category;
-import accountant.model.Profile;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import accountant.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.tinylog.Logger;
 
+import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.*;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static java.lang.Math.abs;
 
 public class MenuController {
 
+    ProfileHandler profileHandler = new ProfileHandler();
+    CashHandler cashHandler = new CashHandler();
+    CategoryHandler  categoryHandler = new CategoryHandler();
     public Profile profile;
 
 
     @FXML
     private Text welcome_txt;
 
-    public void setWelcome_txt(){
+    @FXML
+    private Text weekly_total;
 
+    @FXML
+    private Text weekly_best;
+
+    @FXML
+    private Text weekly_total_of_best;
+
+    public void initalize(Profile profile){
+        this.profile = profile;
         welcome_txt.setText("Üdvözlünk, " + profile.getUsername() + "\t\t" + "Egyenleg : " + profile.getBalance());
+        int WeeklyTotal = calculateWeeklyTotal(cashHandler.getOwnTransaction(profile.getId()));
+        weekly_total.setText("Heti kiadás: " + WeeklyTotal);
+        weekly_best.setText("A leggyakoribb kateógira a héten: " + calculateWeeklyBest(cashHandler.getOwnTransaction(profile.getId())));
+        weekly_total_of_best.setText("A leggyakoribb kategória kiadása a héten : " + calculateWeeklyTotalOfBest(calculateWeeklyBest(cashHandler.getOwnTransaction(profile.getId()))));
 
     }
 
@@ -64,5 +87,75 @@ public class MenuController {
         transactionController.initalize(profile.getId());
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public int calculateWeeklyTotal(List<Cash> total)  {
+
+        try {
+            int weekly_total = 0;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            for(Cash value : total){
+                LocalDate localDate = LocalDate.parse(value.getDate(),formatter);
+                if(localDate.isAfter(localDate.minusWeeks(1)) && value.getMoney() < 0){
+                    weekly_total += value.getMoney();
+                }
+            }
+
+            return abs(weekly_total);
+
+        }
+        catch (DateTimeParseException e){
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+    public String calculateWeeklyBest(List<Cash> total){
+        List<Cash> weekly = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        for (Cash value : total){
+            LocalDate localDate = LocalDate.parse(value.getDate(),formatter);
+            if(localDate.isAfter(localDate.minusWeeks(1)) && value.getMoney() < 0){
+                weekly.add(value);
+            }
+        }
+        Map<Integer, Long> counted = weekly
+                .stream()
+                .collect(Collectors.groupingBy(Cash::getCategory_id, Collectors.counting()));
+
+        int count = counted
+                .entrySet()
+                .stream()
+                .mapToInt(value -> value.getValue().intValue())
+                .max()
+                .orElseThrow();
+
+        int category_id = counted
+                .entrySet()
+                .stream()
+                .filter(integerLongEntry -> integerLongEntry.getValue().intValue() == count)
+                .mapToInt(integerLongEntry -> integerLongEntry.getKey())
+                .findFirst()
+                .orElseThrow();
+
+        return categoryHandler.selectCategorybyId(category_id);
+
+    }
+
+    public int calculateWeeklyTotalOfBest(String categoryName){
+
+        List<Cash> total = cashHandler.getOwnTransaction(profile.getId());
+        int bestCategoryId = categoryHandler.selectCategoryIdbyName(calculateWeeklyBest(total), profile.getId());
+        int weeklyTotalOfBest = 0;
+
+        for(Cash value: total){
+            if(value.getCategory_id() == bestCategoryId){
+                weeklyTotalOfBest += value.getMoney();
+            }
+        }
+
+        return abs(weeklyTotalOfBest);
+
     }
 }

@@ -13,17 +13,13 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.sql.Date;
-import java.util.Locale;
+import java.security.cert.CertificateRevokedException;
 
 public class TransactionController {
 
     CategoryHandler categoryHandler = new CategoryHandler();
     CashHandler cashHandler = new CashHandler();
-    ProfileQuarry profileQuarry = new ProfileQuarry();
+    ProfileHandler profileHandler = new ProfileHandler();
 
     int profile_id;
 
@@ -77,13 +73,37 @@ public class TransactionController {
                 .cashId(cashHandler.setCashId())
                 .category_id(categoryHandler.selectCategoryIdbyName(categorieList.getSelectionModel().getSelectedItem().toString(), profile_id ))
                 .description(description.getText())
-                .money(Integer.parseInt(summary.getText()))
+                .money(ParseMoney(summary.getText(),categoryHandler.selectCategorybyName(categorieList.getSelectionModel().getSelectedItem().toString(), profile_id) ))
                 .profile_id(profile_id)
                 .build();
+        if(transaction.getMoney() != 0) {
+            cashHandler.setNewTransaction(transaction);
+            setHistory(profile_id);
+            calculateBalance();
+        }
+    }
 
-        cashHandler.setNewTransaction(transaction);
-        setHistory(profile_id);
-        calculateBalance();
+    public int ParseMoney(String summaryText, Category category){
+        int money = 0;
+
+        try{
+            money = Integer.parseInt(summary.getText());
+
+            if(category.isIn_out()){
+                return 0 + Math.abs(money);
+            }
+            else{
+                return 0-Math.abs(money);
+            }
+
+        }
+        catch (NumberFormatException e){
+            Alert inputAlert = new Alert(Alert.AlertType.WARNING);
+            inputAlert.setHeaderText("Hibás adat");
+            inputAlert.setContentText("A megadott összeg nem szám!");
+            inputAlert.showAndWait();
+        }
+        return 0;
     }
 
     private void calculateBalance() {
@@ -91,7 +111,7 @@ public class TransactionController {
         for(int i = 0; i< cashHandler.getOwnTransaction(profile_id).size(); i++){
             balance += cashHandler.getOwnTransaction(profile_id).get(i).getMoney();
         }
-        profileQuarry.updateBalance(profile_id, balance);
+        profileHandler.updateBalance(profile_id, balance);
     }
 
     public void back(ActionEvent event) throws IOException {
@@ -99,8 +119,7 @@ public class TransactionController {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/fxs/menu.fxml"));
         Parent root = fxmlLoader.load();
         MenuController menu = fxmlLoader.<MenuController>getController();
-        menu.profile = profileQuarry.getProfileFromId(profile_id);
-        menu.setWelcome_txt();
+        menu.initalize(profileHandler.getProfileFromId(profile_id));
         stage.setScene(new Scene(root));
         stage.show();
     }

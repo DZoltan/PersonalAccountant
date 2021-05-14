@@ -49,4 +49,5 @@ public interface ProfileDAO {
 
     @SqlQuery("SELECT * FROM Profiles ORDER BY id")
     List<Profile> listProfile();
+
 }

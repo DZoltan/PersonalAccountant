@@ -72,5 +72,9 @@ public class CategoryHandler {
         return Integer.parseInt(dao.searchCategoryIdbyName(name, profile_id).orElseThrow());
     }
 
+    public Category selectCategorybyName(String name, int profile_id){
+        return dao.searchCategorybyName(name, profile_id).orElseThrow();
+    }
+
 
 }

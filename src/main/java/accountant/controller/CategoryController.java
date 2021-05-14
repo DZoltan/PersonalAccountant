@@ -2,11 +2,10 @@ package accountant.controller;
 
 import accountant.model.Category;
 import accountant.model.CategoryHandler;
-import accountant.model.ProfileQuarry;
+import accountant.model.ProfileHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -14,8 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -27,20 +25,20 @@ import java.util.Optional;
 
 public class CategoryController {
     int profile_id;
-    ProfileQuarry profileQuarry = new ProfileQuarry();
+    ProfileHandler profileHandler = new ProfileHandler();
 
     CategoryHandler handler = new CategoryHandler();
     List<Category> category = new ArrayList<>();
     @FXML
-    public ListView<String> OwnCategory = new ListView<String>();
+    public ListView<String> OwnCategory = new ListView<>();
 
     @FXML
     public void setOwnCategory(int id){
         profile_id = id;
         category = handler.selectOwnCategory(id);
         ObservableList<String> DataList = FXCollections.observableArrayList();
-        for(int i = 0; i<category.size() ; i++){
-            DataList.add(category.get(i).getData());
+        for (Category value : category) {
+            DataList.add(value.getData());
         }
         OwnCategory.setItems(DataList);
     }
@@ -51,8 +49,7 @@ public class CategoryController {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/fxs/menu.fxml"));
         Parent root = fxmlLoader.load();
         MenuController menu = fxmlLoader.<MenuController>getController();
-        menu.profile = profileQuarry.getProfileFromId(profile_id);
-        menu.setWelcome_txt();
+        menu.initalize(profileHandler.getProfileFromId(profile_id));
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -99,20 +96,17 @@ public class CategoryController {
         setOwnCategory(profile_id);
     }
 
-    public void selectItem(MouseEvent mouseEvent) {
-        OwnCategory.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if(mouseEvent.getClickCount() == 2){
-                    ModifyDialog(category.get(OwnCategory.getSelectionModel().getSelectedIndex()));
-                }
+    public void selectItem() {
+        OwnCategory.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 2){
+                ModifyDialog(category.get(OwnCategory.getSelectionModel().getSelectedIndex()));
             }
         });
 
     }
 
 
-    public void newCategory(ActionEvent event) {
+    public void newCategory() {
         Dialog<Pair<String, Boolean>> dialog = new Dialog<>();
         dialog.setTitle("Kategória");
         dialog.setHeaderText("Új Kategória hozzáadása");

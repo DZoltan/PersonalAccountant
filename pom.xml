@@ -7,9 +7,23 @@
     <groupId>org.example</groupId>
     <artifactId>PersonalAccountant</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <developers>
+        <developer>
+            <id>zltnd</id>
+            <name>Zoltán Dobos</name>
+            <email>dobos.zoltan.esp@gmail.com</email>
+            <organization>Faculty of Informatics, University of Debrecen</organization>
+            <organizationUrl>https://inf.unideb.hu/</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/DZoltan/PersonalAccountant</url>
+        <connection>scm:git:https://github.com/DZoltan/PersonalAccountant</connection>
+        <developerConnection>scm:git:https://github.com/DZoltan/PersonalAccountant</developerConnection>
+    </scm>
     <properties>
         <maven.compiler.release>15</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson-databind.version>2.12.1</jackson-databind.version>
         <exec.mainClass>accountant.Main</exec.mainClass>
         <tinylog.version>2.2.1</tinylog.version>
@@ -77,6 +91,12 @@
             <artifactId>tinylog-impl</artifactId>
             <version>${tinylog.version}</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.7.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>

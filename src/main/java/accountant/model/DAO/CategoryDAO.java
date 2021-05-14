@@ -45,6 +45,9 @@ public interface CategoryDAO {
     @SqlQuery("SELECT id FROM Category WHERE(category_name = :category_name AND profile_id = :profile_id)")
     Optional<String> searchCategoryIdbyName(@Bind("category_name") String category_name, @Bind("profile_id") int profile_id);
 
+    @SqlQuery("SELECT * FROM Category WHERE(category_name = :category_name AND profile_id = :profile_id)")
+    Optional<Category> searchCategorybyName(@Bind("category_name") String category_name, @Bind("profile_id") int profile_id);
+
 
     @SqlQuery("SELECT * FROM Category ORDER BY id")
     List<Category> listAllCategory();

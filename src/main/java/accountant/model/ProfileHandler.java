@@ -7,9 +7,10 @@ import org.jdbi.v3.sqlobject.Handler;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
 import java.sql.SQLOutput;
+import java.util.List;
 import java.util.NoSuchElementException;
 
-public class ProfileQuarry{
+public class ProfileHandler {
     public int id = 0;
     public Profile profile = new Profile();
 
@@ -19,7 +20,7 @@ public class ProfileQuarry{
      Handle handle = jdbi.open();
      ProfileDAO dao = handle.attach(ProfileDAO.class);
 
-     public ProfileQuarry() {
+     public ProfileHandler() {
          try {
             dao.createProfileTable();
             dao.createPasswordTable();
@@ -39,7 +40,7 @@ public class ProfileQuarry{
     public void CreateProfile (String username, String password){
 
     try {
-        id = dao.listProfile().size() + 1;
+        id = getNewProfileId(dao.listProfile());
         String Encrypted = Enrcyptor(password, id);
         Profile new_profile = new Profile(id, username, 0);
         dao.insertNewProfile(new_profile);
@@ -54,8 +55,11 @@ public class ProfileQuarry{
          dao.updateBalance(id,balance);
     }
 
+    /*public int getBalance(String username){
+         return Integer.parseInt(dao.getBalanceFromDb(username).orElseThrow());
+    }*/
+
     public boolean loginProfile (String username, String password){
-    int balance = 0;
     int profile_id = 0;
     String EncryptedPasswordFromDb = "";
 
@@ -72,7 +76,7 @@ public class ProfileQuarry{
     if(EncryptedPasswordFromDb != "") {
         String Encrypted = Enrcyptor(password, profile_id);
         if (EncryptedPasswordFromDb.contentEquals(Encrypted)) {
-            Profile used_profile = new Profile(profile_id, username, balance);
+            Profile used_profile = getProfileFromId(profile_id);
             profile = used_profile;
             return true;
         } else {
@@ -87,15 +91,20 @@ public class ProfileQuarry{
          return dao.getProfileFromID(id).orElseThrow();
     }
 
+    public int getNewProfileId(List<Profile> profileList){
+        if(profileList.size() == 0) return 0;
+        else {
+            return  profileList.stream().mapToInt(Profile::getId).max().orElseThrow() + 1;
+        }
+    }
 
     public String Enrcyptor(String password, int CryptNum ){
         StringBuilder CryptedPass = new StringBuilder();
         for(int i = 0; i < password.length(); i++){
             int NumOfChar = password.charAt(i);
-            int CryptedNumOfChar = NumOfChar + CryptNum * 7;
+            int CryptedNumOfChar = NumOfChar + CryptNum * 7 ;
             char NewCharacter = (char) CryptedNumOfChar ;
             CryptedPass.append(NewCharacter);
-            //System.out.println(i + " "+ password.charAt(i) + " " + NumOfChar + " " + CryptedNumOfChar + " " + NewCharacter );
         }
 
         return  CryptedPass.toString();

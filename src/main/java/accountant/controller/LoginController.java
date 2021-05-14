@@ -1,6 +1,6 @@
 package accountant.controller;
 
-import accountant.model.ProfileQuarry;
+import accountant.model.ProfileHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,17 +12,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.tinylog.Logger;
 
-import java.awt.*;
 import java.io.IOException;
 
 
 public class LoginController {
 
-    ProfileQuarry profile = new ProfileQuarry();
+    ProfileHandler profileHandler = new ProfileHandler();
 
     @FXML
     private TextField username;
@@ -38,7 +36,7 @@ public class LoginController {
 
     @FXML
     public void login(ActionEvent actionEvent) throws IOException {
-        if(profile.loginProfile(username.getText(), password.getText())){
+        if(profileHandler.loginProfile(username.getText(), password.getText())){
             Logger.info(username.getText() + " Sikeresen bejelentkezett.");
             Alert succeddAlert = new Alert(Alert.AlertType.INFORMATION);
             succeddAlert.setHeaderText("Sikeres bejelentkezés");
@@ -57,7 +55,7 @@ public class LoginController {
 
     }
 
-    public void registration(ActionEvent actionEvent) {
+    public void registration(ActionEvent actionEvent) throws IOException {
         if(!login.isDisable())
         {
             registration_lbl.setVisible(true);
@@ -65,7 +63,7 @@ public class LoginController {
         }
         else if(login.isDisable())
         {
-            profile.CreateProfile(username.getText(), password.getText());
+            profileHandler.CreateProfile(username.getText(), password.getText());
 
             Logger.info(username.getText() + " Sikeresen regisztrált.");
 
@@ -73,21 +71,19 @@ public class LoginController {
             succeddAlert.setHeaderText("Sikeres regisztráció");
             succeddAlert.setContentText("A profil regisztrációja siekres volt.");
             succeddAlert.showAndWait();
+
+            switchToMenu(actionEvent);
         }
     }
 
     public void switchToMenu(ActionEvent event) throws IOException {
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/fxs/menu.fxml"));
         Parent root = fxmlLoader.load();
         MenuController menu = fxmlLoader.<MenuController>getController();
-        menu.profile = profile.profile;
-        menu.setWelcome_txt();
+        menu.initalize(profileHandler.profile);
         stage.setScene(new Scene(root));
         stage.show();
-    }
-
-    public void test(ActionEvent event) {
-        System.out.println("teszt");
     }
 }
