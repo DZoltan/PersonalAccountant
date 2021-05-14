@@ -32,6 +32,7 @@
         <jacoco.version>0.8.7</jacoco.version>
         <surefire.version>3.0.0-M5</surefire.version>
         <tinylog.version>2.2.1</tinylog.version>
+        <jackson-databind.version>2.12.1</jackson-databind.version>
     </properties>
     <dependencies>
         <dependency>
@@ -201,7 +202,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.0.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -213,8 +214,8 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>${surefire.version}</version>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -227,6 +228,18 @@
                         </reports>
                     </reportSet>
                 </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <show>private</show>
+                    <detectLinks>true</detectLinks>
+                    <links>
+                        <link>https://javadoc.io/doc/com.fasterxml.jackson.core/jackson-databind/${jackson-databind.version}</link>
+                    </links>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>
