@@ -67,8 +67,6 @@ public class TransactionController {
 
 
     public void addTransaction(ActionEvent event) {
-        //TODO: A CashID nak muszáj értéket adni, kell bele egy ág, ami üres tábla mellett vissza ad 0-t.
-
         Cash transaction = Cash.builder()
                 .cashId(cashHandler.setCashId())
                 .category_id(categoryHandler.selectCategoryIdbyName(categorieList.getSelectionModel().getSelectedItem().toString(), profile_id ))
@@ -87,7 +85,7 @@ public class TransactionController {
         int money = 0;
 
         try{
-            money = Integer.parseInt(summary.getText());
+            money = Integer.parseInt(summaryText);
 
             if(category.isIn_out()){
                 return 0 + Math.abs(money);

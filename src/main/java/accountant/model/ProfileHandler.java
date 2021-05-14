@@ -55,10 +55,6 @@ public class ProfileHandler {
          dao.updateBalance(id,balance);
     }
 
-    /*public int getBalance(String username){
-         return Integer.parseInt(dao.getBalanceFromDb(username).orElseThrow());
-    }*/
-
     public boolean loginProfile (String username, String password){
     int profile_id = 0;
     String EncryptedPasswordFromDb = "";

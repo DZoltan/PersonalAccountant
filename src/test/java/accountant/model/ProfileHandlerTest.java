@@ -1,16 +1,14 @@
-package HandlerTest;
+package accountant.model;
 
-import accountant.model.Profile;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import accountant.model.ProfileHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class testProfile {
+import static org.junit.jupiter.api.Assertions.*;
+
+class ProfileHandlerTest {
+
     ProfileHandler profileHandler = new ProfileHandler();
 
     private String Encyptor(String text, int CryptNum){
@@ -21,16 +19,7 @@ public class testProfile {
     }
 
     @Test
-    void testEncryptor(){
-
-        assertEquals( "alma", Encyptor("alma", 2));
-        assertEquals( "alma", Encyptor("alma", 42));
-        assertEquals( "körte", Encyptor("körte", 4));
-        assertEquals( "körte", Encyptor("körte", 75));
-    }
-
-    @Test
-    void testProfileId(){
+    void getNewProfileId() {
         List<Profile> profile = new ArrayList<>();
 
         List<Profile> profile1 = new ArrayList<>();
@@ -46,7 +35,13 @@ public class testProfile {
         assertEquals(0, profileHandler.getNewProfileId(profile));
         assertEquals(3, profileHandler.getNewProfileId(profile1));
         assertEquals(5, profileHandler.getNewProfileId(profile2));
+    }
 
-        
+    @Test
+    void enrcyptor() {
+        assertEquals( "alma", Encyptor("alma", 2));
+        assertEquals( "alma", Encyptor("alma", 42));
+        assertEquals( "körte", Encyptor("körte", 4));
+        assertEquals( "körte", Encyptor("körte", 75));
     }
 }
