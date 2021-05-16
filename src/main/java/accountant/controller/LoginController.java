@@ -35,6 +35,13 @@ public class LoginController {
     private Button login;
 
     @FXML
+    public void init(){
+        if(!profileHandler.checkProfiles()){
+            login.setDisable(true);
+        }
+    }
+
+    @FXML
     public void login(ActionEvent actionEvent) throws IOException {
         if(profileHandler.loginProfile(username.getText(), password.getText())){
             Logger.info(username.getText() + ": Login was successful.");
