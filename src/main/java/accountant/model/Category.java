@@ -23,6 +23,7 @@ public class Category {
 
     /**
      * This function return with a String, which contains the data of each Category
+     * @return id, InOut Type and name of category
      * */
     public String getData(){
         String inOut = "";

@@ -28,7 +28,6 @@ class CashHandlerTest {
         cash2.add(new Cash(3, 1, -40000, 7,"2021-05-04", "test"));
         cash2.add(new Cash(4, 1, 300000, 4,"2021-04-14", "test"));
         cash2.add(new Cash(5, 1, -1000, 4,"2021-04-19", "test"));
-        cash2.add(new Cash(6, 1, 2000, 4,"2021-05-18", "test"));
         cash2.add(new Cash(7, 1, -15000, 4,"2021-05-09", "test"));
 
     }
@@ -49,7 +48,7 @@ class CashHandlerTest {
         fillList();
         assertEquals(0, cashHandler.calculateWeeklyTotal(cash));
         assertEquals(170000, cashHandler.calculateWeeklyTotal(cash1));
-        assertEquals(122000, cashHandler.calculateWeeklyTotal(cash2));
+        assertEquals(107000, cashHandler.calculateWeeklyTotal(cash2));
 
     }
 
@@ -59,5 +58,13 @@ class CashHandlerTest {
         assertEquals(-1, cashHandler.calculateWeeklyBest(cash));
         assertEquals(6, cashHandler.calculateWeeklyBest(cash1));
         assertEquals(-1, cashHandler.calculateWeeklyBest(cash2));
+    }
+
+    @Test
+    void setCashId() {
+        fillList();
+        assertEquals(0, cashHandler.setCashId(cash));
+        assertEquals(5, cashHandler.setCashId(cash1));
+        assertEquals(8, cashHandler.setCashId(cash2));
     }
 }

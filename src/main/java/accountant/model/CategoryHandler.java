@@ -27,7 +27,6 @@ public class CategoryHandler {
 
     /**
      * Constructor of class. Create a table for {@link Category} in database.
-     * @throws Exception If the database is not reachable.
      * */
     public CategoryHandler(){
         try{
@@ -43,7 +42,6 @@ public class CategoryHandler {
      * @param inOut Category is expense or income.
      * @param name The name of the Category.
      * @param profile_id The user, who stored the category
-     * @throws Exception If the database is not reachable.
      * */
     public void setNewCategory(boolean inOut, String name, int profile_id){
             int id = getNewCategoryId(dao.listAllCategory());
