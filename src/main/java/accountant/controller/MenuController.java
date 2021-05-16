@@ -43,25 +43,29 @@ public class MenuController {
 
     public void initalize(Profile profile){
         this.profile = profile;
-        welcome_txt.setText("Üdvözlünk, " + profile.getUsername() + "\t\t" + "Egyenleg : " + profile.getBalance());
-        int WeeklyTotal = calculateWeeklyTotal(cashHandler.getOwnTransaction(profile.getId()));
-        weekly_total.setText("Heti kiadás: " + WeeklyTotal);
+        welcome_txt.setText("Welcome, " + profile.getUsername() + "!\t\t" + "Balance : " + profile.getBalance());
+        int WeeklyTotal = cashHandler.calculateWeeklyTotal(cashHandler.getOwnTransaction(profile.getId()));
+        weekly_total.setText("Weekly expense: " + WeeklyTotal);
 
-        int bestCategory = calculateWeeklyBest(cashHandler.getOwnTransaction(profile.getId()));
+        int bestCategory = cashHandler.calculateWeeklyBest(cashHandler.getOwnTransaction(profile.getId()));
         if(bestCategory != -1) {
 
 
-            weekly_best.setText("A leggyakoribb kateógira a héten: " + categoryHandler.selectCategorybyId(bestCategory));
-            weekly_total_of_best.setText("A leggyakoribb kategória kiadása a héten : " + calculateWeeklyTotalOfBest(categoryHandler.selectCategorybyId(calculateWeeklyBest(cashHandler.getOwnTransaction(profile.getId())))));
+            weekly_best.setText("Category of the week: " + categoryHandler.selectCategorybyId(bestCategory));
+            weekly_total_of_best.setText("Cost of the Category of the Week : " + cashHandler.calculateWeeklyTotalOfBest(
+                    profile.getId(),
+                    categoryHandler.selectCategorybyId(
+                            cashHandler.calculateWeeklyBest(
+                                    cashHandler.getOwnTransaction(profile.getId())))));
         }
         else {
-            weekly_best.setText("A leggyakoribb kateógira a héten: -");
-            weekly_total_of_best.setText("A leggyakoribb kategória kiadása a héten : -");
+            weekly_best.setText("Category of the week: -");
+            weekly_total_of_best.setText("Cost of the Category of the Week : -");
         }
     }
 
     public void logout(ActionEvent event) throws IOException {
-        Logger.info(profile.getUsername() + " kijelentkezett.");
+        Logger.info(profile.getUsername() + " logged out.");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/fxs/login.fxml"));
         stage.setScene(new Scene(root));
@@ -92,84 +96,4 @@ public class MenuController {
         stage.show();
     }
 
-    public int calculateWeeklyTotal(List<Cash> total)  {
-
-        try {
-            int weekly_total = 0;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate today = LocalDate.now();
-            for(Cash value : total){
-                LocalDate localDate = LocalDate.parse(value.getDate(),formatter);
-                if(localDate.isAfter(today.minusWeeks(1)) && value.getMoney() < 0){
-                    weekly_total += value.getMoney();
-                }
-            }
-
-            return abs(weekly_total);
-
-        }
-        catch (DateTimeParseException e){
-            System.out.println(e);
-        }
-        return 0;
-    }
-
-    public int calculateWeeklyBest(List<Cash> total){
-
-        if(total.size() == 0){
-            return -1;
-        }
-
-        List<Cash> weekly = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate today = LocalDate.now();
-
-        for (Cash value : total){
-            LocalDate localDate = LocalDate.parse(value.getDate(),formatter);
-            if(localDate.isAfter(today.minusWeeks(1)) && value.getMoney() < 0){
-                weekly.add(value);
-            }
-        }
-        Map<Integer, Long> counted = weekly
-                .stream()
-                .collect(Collectors.groupingBy(Cash::getCategory_id, Collectors.counting()));
-
-        int count = counted
-                .entrySet()
-                .stream()
-                .mapToInt(value -> value.getValue().intValue())
-                .max()
-                .orElseThrow();
-
-        if(count == 1){
-            return -1;
-        }
-
-        int category_id = counted
-                .entrySet()
-                .stream()
-                .filter(integerLongEntry -> integerLongEntry.getValue().intValue() == count)
-                .mapToInt(integerLongEntry -> integerLongEntry.getKey())
-                .findFirst()
-                .orElseThrow();
-
-        return category_id;
-
-    }
-
-    public int calculateWeeklyTotalOfBest(String categoryName){
-
-        List<Cash> total = cashHandler.getOwnTransaction(profile.getId());
-        int bestCategoryId = categoryHandler.selectCategoryIdbyName(categoryHandler.selectCategorybyId(calculateWeeklyBest(total)), profile.getId());
-        int weeklyTotalOfBest = 0;
-
-        for(Cash value: total){
-            if(value.getCategory_id() == bestCategoryId){
-                weeklyTotalOfBest += value.getMoney();
-            }
-        }
-
-        return abs(weeklyTotalOfBest);
-
-    }
 }

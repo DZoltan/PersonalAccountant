@@ -12,7 +12,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accountant.controller.TransactionController">
    <children>
       <ListView fx:id="history" layoutX="352.0" layoutY="34.0" prefHeight="366.0" prefWidth="248.0" />
-      <ChoiceBox fx:id="categorieList" layoutX="25.0" layoutY="133.0" prefHeight="25.0" prefWidth="211.0" />
+      <ChoiceBox fx:id="categoriesList" layoutX="25.0" layoutY="133.0" prefHeight="25.0" prefWidth="211.0" />
       <Button layoutX="264.0" layoutY="74.0" mnemonicParsing="false" onAction="#addTransaction" prefHeight="59.0" prefWidth="65.0" text="Hozzáad" />
       <TextField fx:id="summary" layoutX="25.0" layoutY="74.0" prefHeight="25.0" prefWidth="211.0" promptText="Összeg" />
       <TextArea fx:id="description" layoutX="25.0" layoutY="201.0" prefHeight="109.0" prefWidth="307.0" />

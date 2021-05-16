@@ -25,11 +25,8 @@ public interface CashDAO {
             """)
     void createCashTable();
 
-    /*@SqlUpdate("INSERT INTO Cash VALUES (:cash_id, :profile_id :money, :category_id, 'alma')")
-    void insertCash(@BindBean Cash cash);*/
-
     @SqlUpdate("INSERT INTO Cash VALUES (:cash_id, :profile_id, :money, :category_id, :description, date(\"now\"))")
-    void insertCash(@Bind("cash_id") int cash_id,@Bind("profile_id") int profile_id,@Bind("money") int money, @Bind("category_id") int category_id, @Bind("description") String description);
+    void insertCash(@BindBean Cash cash);
 
     @SqlQuery("SELECT * FROM Cash ORDER BY date")
     List<Cash> getAllTransactions();

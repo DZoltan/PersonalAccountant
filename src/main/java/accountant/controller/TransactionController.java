@@ -13,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.security.cert.CertificateRevokedException;
 
 public class TransactionController {
 
@@ -24,7 +23,7 @@ public class TransactionController {
     int profile_id;
 
     @FXML
-    private ChoiceBox categorieList;
+    private ChoiceBox categoriesList;
 
     @FXML
     private TextField summary;
@@ -62,54 +61,38 @@ public class TransactionController {
         for(int i = 0; i < categoryHandler.selectOwnCategory(profile_id).size();i++){
             CategoryName.add(categoryHandler.selectOwnCategory(profile_id).get(i).getCategory_name());
         }
-        categorieList.setItems(CategoryName);
+        categoriesList.setItems(CategoryName);
     }
 
 
     public void addTransaction(ActionEvent event) {
         Cash transaction = Cash.builder()
-                .cashId(cashHandler.setCashId())
-                .category_id(categoryHandler.selectCategoryIdbyName(categorieList.getSelectionModel().getSelectedItem().toString(), profile_id ))
+                .cashId(cashHandler.setCashId(cashHandler.getAllTransaction()))
+                .category_id(categoryHandler.selectCategoryIdByName(categoriesList.getSelectionModel().getSelectedItem().toString(), profile_id ))
                 .description(description.getText())
-                .money(ParseMoney(summary.getText(),categoryHandler.selectCategorybyName(categorieList.getSelectionModel().getSelectedItem().toString(), profile_id) ))
+                .money(ParseMoney(summary.getText(),categoryHandler.selectCategorybyName(categoriesList.getSelectionModel().getSelectedItem().toString(), profile_id) ))
                 .profile_id(profile_id)
                 .build();
         if(transaction.getMoney() != 0) {
             cashHandler.setNewTransaction(transaction);
             setHistory(profile_id);
-            calculateBalance();
+            cashHandler.calculateBalance(profile_id);
         }
     }
 
     public int ParseMoney(String summaryText, Category category){
         int money = 0;
-
         try{
-            money = Integer.parseInt(summaryText);
-
-            if(category.isIn_out()){
-                return 0 + Math.abs(money);
-            }
-            else{
-                return 0-Math.abs(money);
-            }
-
+            money = cashHandler.ParseMoney(summaryText, category);
         }
         catch (NumberFormatException e){
             Alert inputAlert = new Alert(Alert.AlertType.WARNING);
-            inputAlert.setHeaderText("Hibás adat");
-            inputAlert.setContentText("A megadott összeg nem szám!");
+            inputAlert.setHeaderText("Invalid Number");
+            inputAlert.setContentText("Please enter a valid number");
             inputAlert.showAndWait();
+            return 0;
         }
-        return 0;
-    }
-
-    private void calculateBalance() {
-        int balance = 0;
-        for(int i = 0; i< cashHandler.getOwnTransaction(profile_id).size(); i++){
-            balance += cashHandler.getOwnTransaction(profile_id).get(i).getMoney();
-        }
-        profileHandler.updateBalance(profile_id, balance);
+        return money;
     }
 
     public void back(ActionEvent event) throws IOException {

@@ -37,19 +37,19 @@ public class LoginController {
     @FXML
     public void login(ActionEvent actionEvent) throws IOException {
         if(profileHandler.loginProfile(username.getText(), password.getText())){
-            Logger.info(username.getText() + " Sikeresen bejelentkezett.");
-            Alert succeddAlert = new Alert(Alert.AlertType.INFORMATION);
-            succeddAlert.setHeaderText("Sikeres bejelentkezés");
-            succeddAlert.showAndWait();
+            Logger.info(username.getText() + ": Login was successful.");
+            Alert succeedAlert = new Alert(Alert.AlertType.INFORMATION);
+            succeedAlert.setHeaderText("Login was successful.");
+            succeedAlert.showAndWait();
 
             switchToMenu(actionEvent);
         }
         else{
-            Logger.error(username.getText() + " : Bejelentkezési hiba!");
+            Logger.error(username.getText() + ": Failed to login ");
 
             Alert passwordAlert = new Alert(Alert.AlertType.WARNING);
-            passwordAlert.setHeaderText("Hibás adat");
-            passwordAlert.setContentText("A megadott felhasználónév/jelszó hibás");
+            passwordAlert.setHeaderText("Bad Credentials");
+            passwordAlert.setContentText("Invalid Username and/or Password");
             passwordAlert.showAndWait();
         }
 
@@ -65,12 +65,11 @@ public class LoginController {
         {
             profileHandler.CreateProfile(username.getText(), password.getText());
 
-            Logger.info(username.getText() + " Sikeresen regisztrált.");
+            Logger.info(username.getText() + ": Registration was successful.");
 
-            Alert succeddAlert = new Alert(Alert.AlertType.INFORMATION);
-            succeddAlert.setHeaderText("Sikeres regisztráció");
-            succeddAlert.setContentText("A profil regisztrációja siekres volt.");
-            succeddAlert.showAndWait();
+            Alert succeedAlert = new Alert(Alert.AlertType.INFORMATION);
+            succeedAlert.setHeaderText("Registration was successful.");
+            succeedAlert.showAndWait();
 
             switchToMenu(actionEvent);
         }

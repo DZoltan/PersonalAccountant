@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Class representing profiles, which implement a multi-user application.
+ * */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

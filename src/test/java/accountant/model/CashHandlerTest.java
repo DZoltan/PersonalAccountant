@@ -1,18 +1,15 @@
-package accountant.controller;
+package accountant.model;
 
-import accountant.model.Cash;
 import org.junit.jupiter.api.Test;
 
-import java.io.OptionalDataException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MenuControllerTest {
+class CashHandlerTest {
+    CashHandler cashHandler = new CashHandler();
 
-    MenuController menuController = new MenuController();
 
     List<Cash> cash = new ArrayList<>();
     List<Cash> cash1 = new ArrayList<>();
@@ -36,21 +33,31 @@ class MenuControllerTest {
 
     }
 
+    @Test
+    void parseMoney() {
+        Category category1 = new Category(0, true, "teszt", 1);
+        Category category2 = new Category(1, false, "teszt", 1);
+
+        assertEquals(12000, cashHandler.ParseMoney("12000",category1));
+        assertEquals(-12000, cashHandler.ParseMoney("12000",category2));
+        assertEquals(12000, cashHandler.ParseMoney("-12000",category1));
+        assertEquals(-12000, cashHandler.ParseMoney("-12000",category2));
+    }
 
     @Test
     void calculateWeeklyTotal() {
         fillList();
-        assertEquals(0, menuController.calculateWeeklyTotal(cash));
-        assertEquals(170000, menuController.calculateWeeklyTotal(cash1));
-        assertEquals(122000, menuController.calculateWeeklyTotal(cash2));
+        assertEquals(0, cashHandler.calculateWeeklyTotal(cash));
+        assertEquals(170000, cashHandler.calculateWeeklyTotal(cash1));
+        assertEquals(122000, cashHandler.calculateWeeklyTotal(cash2));
 
     }
 
     @Test
     void calculateWeeklyBest() {
         fillList();
-        assertEquals(-1, menuController.calculateWeeklyBest(cash));
-        assertEquals(6, menuController.calculateWeeklyBest(cash1));
-        assertEquals(-1, menuController.calculateWeeklyBest(cash2));
+        assertEquals(-1, cashHandler.calculateWeeklyBest(cash));
+        assertEquals(6, cashHandler.calculateWeeklyBest(cash1));
+        assertEquals(-1, cashHandler.calculateWeeklyBest(cash2));
     }
 }

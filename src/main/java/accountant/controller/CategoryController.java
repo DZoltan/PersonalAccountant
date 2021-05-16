@@ -56,11 +56,11 @@ public class CategoryController {
 
     private void ModifyDialog(Category category){
         Dialog<Pair<String, Boolean>> dialog = new Dialog<>();
-        dialog.setTitle("Kategória");
-        dialog.setHeaderText("Módosítd, vagy töröld a kiválaszott kategóriát!");
+        dialog.setTitle("Category");
+        dialog.setHeaderText("Update or Delete the selected category");
 
-        ButtonType modifyButtonType = new ButtonType("Módosítás", ButtonBar.ButtonData.OK_DONE);
-        ButtonType deleteButtonType = new ButtonType("Törlés", ButtonBar.ButtonData.NO);
+        ButtonType modifyButtonType = new ButtonType("Update!", ButtonBar.ButtonData.OK_DONE);
+        ButtonType deleteButtonType = new ButtonType("Delete", ButtonBar.ButtonData.NO);
         dialog.getDialogPane().getButtonTypes().addAll(modifyButtonType,deleteButtonType,ButtonType.CANCEL);
 
         GridPane grid = new GridPane();
@@ -72,13 +72,10 @@ public class CategoryController {
         categoryName.setPromptText(category.getCategory_name());
         CheckBox inOut = new CheckBox();
 
-        grid.add(new Label("Név:" + profile_id), 0, 0);
+        grid.add(new Label("Name:" + profile_id), 0, 0);
         grid.add(categoryName, 1, 0);
-        grid.add(new Label("Bevétel:"), 0, 1);
+        grid.add(new Label("In(checked) or Out(unchecked):"), 0, 1);
         grid.add(inOut, 1, 1);
-
-        /*Node modifyButton = dialog.getDialogPane().lookupButton(modifyButtonType);
-        modifyButton.setDisable(true);*/
 
         dialog.getDialogPane().setContent(grid);
 
@@ -108,10 +105,10 @@ public class CategoryController {
 
     public void newCategory() {
         Dialog<Pair<String, Boolean>> dialog = new Dialog<>();
-        dialog.setTitle("Kategória");
-        dialog.setHeaderText("Új Kategória hozzáadása");
+        dialog.setTitle("Category");
+        dialog.setHeaderText("Add new Category");
 
-        ButtonType addButtonType = new ButtonType("Hozzáad", ButtonBar.ButtonData.OK_DONE);
+        ButtonType addButtonType = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(addButtonType,ButtonType.CANCEL);
 
         GridPane grid = new GridPane();
@@ -120,12 +117,12 @@ public class CategoryController {
         grid.setPadding(new Insets(20, 150, 10, 10));
 
         TextField categoryName = new TextField();
-        categoryName.setPromptText("Kategória");
+        categoryName.setPromptText("Category");
         CheckBox inOut = new CheckBox();
 
-        grid.add(new Label("Név:"), 0, 0);
+        grid.add(new Label("Name:"), 0, 0);
         grid.add(categoryName, 1, 0);
-        grid.add(new Label("Bevétel:"), 0, 1);
+        grid.add(new Label("In(checked) or Out(unchecked):"), 0, 1);
         grid.add(inOut, 1, 1);
 
 

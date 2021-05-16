@@ -5,8 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Class representing the Cash, the main object of each transaction and statistic.
+ * */
 
-import java.sql.Date;
 
 @Data
 @Builder
