@@ -294,3 +294,5 @@ INFO: test Sikeresen bejelentkezett.
 INFO: test kijelentkezett.
 2021-05-17 10:29:40 [JavaFX Application Thread] accountant.controller.LoginController.login()
 INFO: test: Login was successful.
+2021-05-17 11:07:37 [JavaFX Application Thread] accountant.controller.LoginController.registration()
+INFO: test12: Registration was successful.

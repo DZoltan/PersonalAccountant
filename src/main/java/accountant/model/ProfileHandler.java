@@ -60,6 +60,7 @@ public class ProfileHandler {
         id = getNewProfileId(dao.listProfile());
         String Encrypted = Enrcyptor(password, id);
         Profile new_profile = new Profile(id, username, 0);
+        profile = new_profile;
         dao.insertNewProfile(new_profile);
         dao.insertNewPassword(id, Encrypted);
     }

@@ -22,7 +22,7 @@ class CashHandlerTest {
         cash1.add(new Cash(3, 1, -40000, 7,"2021-05-04", "test"));
         cash1.add(new Cash(4, 1, 300000, 4,"2021-05-14", "test"));
 
-        cash2.add(new Cash(0, 1, -30000, 7,"2021-05-12", "test"));
+        cash2.add(new Cash(0, 1, -30000, 7,"2021-05-15", "test"));
         cash2.add(new Cash(1, 1, -70000, 9,"2021-05-13", "test"));
         cash2.add(new Cash(2, 1, -7000, 6,"2021-05-14", "test"));
         cash2.add(new Cash(3, 1, -40000, 7,"2021-05-04", "test"));
