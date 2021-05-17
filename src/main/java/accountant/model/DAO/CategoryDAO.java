@@ -11,9 +11,16 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.util.List;
 import java.util.Optional;
+
+/**
+ * DAO class for {@link Category} entity.
+ * */
 @RegisterBeanMapper(Category.class)
 public interface CategoryDAO {
 
+    /**
+     * Create a table for {@link Category} objects.
+     * */
     @SqlUpdate("""
            CREATE TABLE IF NOT EXISTS Category (
             id INTEGER PRIMARY KEY,
@@ -24,21 +31,33 @@ public interface CategoryDAO {
             """)
     void createCategoryTable();
 
+    /**
+     * Store a new Category in Database
+     * @param category An object of {@link Category}
+     * */
     @SqlUpdate("INSERT INTO Category VALUES (:id, :in_out, :category_name, :profile_id)")
     void insertNewCategory(@BindBean Category category);
 
+    /**
+     * Modify the stored Category.
+     * @param category_name Name of the category.
+     * @param id id of the category. Must be the same as stored.
+     * @param in_out Boolean. If the category is income then true, otherwise false.
+     * */
     @SqlUpdate("UPDATE Category SET category_name = :category_name, in_out = :in_out WHERE (id = :id)")
     void updateCategory(@Bind("id") int id, @Bind("category_name") String category_name, @Bind("in_out") boolean in_out);
 
+    /**
+     * Delete a category from Database, which contains the given id.
+     * @param id Id of the category to be deleted.
+     * */
     @SqlUpdate("DELETE FROM Category WHERE(id = :id)")
     void deleteCategory(@Bind("id") int id);
 
-    @SqlUpdate("DELETE FROM Category")
-    void deleteAllCategory();
-
-    @SqlQuery("SELECT category_name FROM Category WHERE(category_name = :category_name)")
-    Optional<String> searchCategoryName(@Bind("category_name") String category_name);
-
+    /**
+     * @param id Id of the Category
+     * @return Return with the name of the Category,which belongs to given id.
+     * */
     @SqlQuery("SELECT category_name FROM Category WHERE(id = :id)")
     Optional<String> searchCategorybyId(@Bind("id") int id);
 
