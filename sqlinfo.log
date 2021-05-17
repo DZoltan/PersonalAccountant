@@ -296,3 +296,49 @@ INFO: test kijelentkezett.
 INFO: test: Login was successful.
 2021-05-17 11:07:37 [JavaFX Application Thread] accountant.controller.LoginController.registration()
 INFO: test12: Registration was successful.
+2021-05-17 11:16:18 [JavaFX Application Thread] accountant.controller.LoginController.login()
+ERROR: teszt12: Failed to login 
+2021-05-17 11:16:21 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test12: Login was successful.
+2021-05-17 11:16:35 [JavaFX Application Thread] accountant.controller.CategoryController.lambda$newCategory$2()
+INFO: New Category stored: lakás
+2021-05-17 11:16:42 [JavaFX Application Thread] accountant.controller.CategoryController.lambda$newCategory$2()
+INFO: New Category stored: fizetés
+2021-05-17 11:17:17 [JavaFX Application Thread] accountant.model.CashHandler.setNewTransaction()
+ERROR: The application can't store this value in DataBaseorg.jdbi.v3.core.statement.UnableToCreateStatementException: Missing named parameter 'cash_id' in binding:{positional:{}, named:{}, finder:[{lazy bean property arguments "Cash(cashId=6, profile_id=8, money=-90000, category_id=13, date=null, description=Május havi lakbér)"}]} [statement:"INSERT INTO Cash VALUES (:cash_id, :profile_id, :money, :category_id, :description, date("now"))", arguments:{positional:{}, named:{}, finder:[{lazy bean property arguments "Cash(cashId=6, profile_id=8, money=-90000, category_id=13, date=null, description=Május havi lakbér)"}]}]
+2021-05-17 11:17:17 [JavaFX Application Thread] accountant.controller.TransactionController.addTransaction()
+INFO: New transaction stored. 
+2021-05-17 11:17:18 [JavaFX Application Thread] accountant.model.CashHandler.setNewTransaction()
+ERROR: The application can't store this value in DataBaseorg.jdbi.v3.core.statement.UnableToCreateStatementException: Missing named parameter 'cash_id' in binding:{positional:{}, named:{}, finder:[{lazy bean property arguments "Cash(cashId=6, profile_id=8, money=-90000, category_id=13, date=null, description=Május havi lakbér)"}]} [statement:"INSERT INTO Cash VALUES (:cash_id, :profile_id, :money, :category_id, :description, date("now"))", arguments:{positional:{}, named:{}, finder:[{lazy bean property arguments "Cash(cashId=6, profile_id=8, money=-90000, category_id=13, date=null, description=Május havi lakbér)"}]}]
+2021-05-17 11:17:18 [JavaFX Application Thread] accountant.controller.TransactionController.addTransaction()
+INFO: New transaction stored. 
+2021-05-17 11:17:19 [JavaFX Application Thread] accountant.model.CashHandler.setNewTransaction()
+ERROR: The application can't store this value in DataBaseorg.jdbi.v3.core.statement.UnableToCreateStatementException: Missing named parameter 'cash_id' in binding:{positional:{}, named:{}, finder:[{lazy bean property arguments "Cash(cashId=6, profile_id=8, money=-90000, category_id=13, date=null, description=Május havi lakbér)"}]} [statement:"INSERT INTO Cash VALUES (:cash_id, :profile_id, :money, :category_id, :description, date("now"))", arguments:{positional:{}, named:{}, finder:[{lazy bean property arguments "Cash(cashId=6, profile_id=8, money=-90000, category_id=13, date=null, description=Május havi lakbér)"}]}]
+2021-05-17 11:17:19 [JavaFX Application Thread] accountant.controller.TransactionController.addTransaction()
+INFO: New transaction stored. 
+2021-05-17 11:17:19 [JavaFX Application Thread] accountant.model.CashHandler.setNewTransaction()
+ERROR: The application can't store this value in DataBaseorg.jdbi.v3.core.statement.UnableToCreateStatementException: Missing named parameter 'cash_id' in binding:{positional:{}, named:{}, finder:[{lazy bean property arguments "Cash(cashId=6, profile_id=8, money=-90000, category_id=13, date=null, description=Május havi lakbér)"}]} [statement:"INSERT INTO Cash VALUES (:cash_id, :profile_id, :money, :category_id, :description, date("now"))", arguments:{positional:{}, named:{}, finder:[{lazy bean property arguments "Cash(cashId=6, profile_id=8, money=-90000, category_id=13, date=null, description=Május havi lakbér)"}]}]
+2021-05-17 11:17:19 [JavaFX Application Thread] accountant.controller.TransactionController.addTransaction()
+INFO: New transaction stored. 
+2021-05-17 11:17:19 [JavaFX Application Thread] accountant.model.CashHandler.setNewTransaction()
+ERROR: The application can't store this value in DataBaseorg.jdbi.v3.core.statement.UnableToCreateStatementException: Missing named parameter 'cash_id' in binding:{positional:{}, named:{}, finder:[{lazy bean property arguments "Cash(cashId=6, profile_id=8, money=-90000, category_id=13, date=null, description=Május havi lakbér)"}]} [statement:"INSERT INTO Cash VALUES (:cash_id, :profile_id, :money, :category_id, :description, date("now"))", arguments:{positional:{}, named:{}, finder:[{lazy bean property arguments "Cash(cashId=6, profile_id=8, money=-90000, category_id=13, date=null, description=Május havi lakbér)"}]}]
+2021-05-17 11:17:19 [JavaFX Application Thread] accountant.controller.TransactionController.addTransaction()
+INFO: New transaction stored. 
+2021-05-17 11:17:20 [JavaFX Application Thread] accountant.model.CashHandler.setNewTransaction()
+ERROR: The application can't store this value in DataBaseorg.jdbi.v3.core.statement.UnableToCreateStatementException: Missing named parameter 'cash_id' in binding:{positional:{}, named:{}, finder:[{lazy bean property arguments "Cash(cashId=6, profile_id=8, money=-90000, category_id=13, date=null, description=Május havi lakbér)"}]} [statement:"INSERT INTO Cash VALUES (:cash_id, :profile_id, :money, :category_id, :description, date("now"))", arguments:{positional:{}, named:{}, finder:[{lazy bean property arguments "Cash(cashId=6, profile_id=8, money=-90000, category_id=13, date=null, description=Május havi lakbér)"}]}]
+2021-05-17 11:17:20 [JavaFX Application Thread] accountant.controller.TransactionController.addTransaction()
+INFO: New transaction stored. 
+2021-05-17 11:21:44 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test12: Login was successful.
+2021-05-17 11:22:05 [JavaFX Application Thread] accountant.model.CashHandler.setNewTransaction()
+ERROR: The application can't store this value in DataBaseorg.jdbi.v3.core.statement.UnableToCreateStatementException: Missing named parameter 'cash_id' in binding:{positional:{0:6,1:8,2:90000,3:14,4:Május havi lakbér}, named:{cash:id:6,money:90000,category_id:14,profile_id:8,description:Május havi lakbér}, finder:[]} [statement:"INSERT INTO Cash VALUES (:cash_id, :profile_id, :money, :category_id, :description, date("now"))", arguments:{positional:{0:6,1:8,2:90000,3:14,4:Május havi lakbér}, named:{cash:id:6,money:90000,category_id:14,profile_id:8,description:Május havi lakbér}, finder:[]}]
+2021-05-17 11:22:05 [JavaFX Application Thread] accountant.controller.TransactionController.addTransaction()
+INFO: New transaction stored. 
+2021-05-17 11:24:18 [JavaFX Application Thread] accountant.controller.LoginController.login()
+INFO: test12: Login was successful.
+2021-05-17 11:24:36 [JavaFX Application Thread] accountant.controller.TransactionController.addTransaction()
+INFO: New transaction stored. 
+2021-05-17 11:24:51 [JavaFX Application Thread] accountant.controller.TransactionController.addTransaction()
+INFO: New transaction stored. 
+2021-05-17 11:25:11 [JavaFX Application Thread] accountant.controller.MenuController.logout()
+INFO: test12 logged out.

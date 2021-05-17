@@ -49,7 +49,7 @@ public class CashHandler {
      * */
     public void setNewTransaction(Cash cash){
         try{
-            dao.insertCash(cash);
+            dao.insertCash(cash.getCashId(), cash.getProfile_id(), cash.getMoney(), cash.getCategory_id(), cash.getDescription());
         }
         catch(Exception e){
             Logger.error("The application can't store this value in DataBase" + e);

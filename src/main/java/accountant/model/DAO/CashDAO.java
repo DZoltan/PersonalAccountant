@@ -34,10 +34,9 @@ public interface CashDAO {
 
     /**
      * Store a new {@link Cash} in Database.
-     * @param cash An entity of {@link Cash}.
      * */
     @SqlUpdate("INSERT INTO Cash VALUES (:cash_id, :profile_id, :money, :category_id, :description, date(\"now\"))")
-    void insertCash(@BindBean Cash cash);
+    void insertCash(@Bind("cash_id") int cash_id, @Bind("profile_id") int profile_id, @Bind("money") int money, @Bind("category_id") int category_id, @Bind("description") String description);
 
     /**
      * List all {@link Cash} , ordered by date.
