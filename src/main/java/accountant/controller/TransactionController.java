@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.tinylog.Logger;
 
 import java.io.IOException;
 
@@ -77,6 +78,7 @@ public class TransactionController {
             cashHandler.setNewTransaction(transaction);
             setHistory(profile_id);
             cashHandler.calculateBalance(profile_id);
+            Logger.info("New transaction stored. " );
         }
     }
 
@@ -90,6 +92,7 @@ public class TransactionController {
             inputAlert.setHeaderText("Invalid Number");
             inputAlert.setContentText("Please enter a valid number");
             inputAlert.showAndWait();
+            Logger.error("Invalid number");
             return 0;
         }
         return money;

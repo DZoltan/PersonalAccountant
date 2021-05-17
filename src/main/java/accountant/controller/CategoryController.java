@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import org.tinylog.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -82,9 +83,11 @@ public class CategoryController {
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == modifyButtonType) {
                 handler.updateCategory(category.getId(), categoryName.getText(), inOut.isSelected());
+                Logger.info(categoryName.getText() + " has modified.");
             }
             else if(dialogButton == deleteButtonType){
                 handler.deleteCategory(category.getId());
+                Logger.info(categoryName.getText() + " has deleted.");
             }
             return null;
         });
@@ -132,6 +135,7 @@ public class CategoryController {
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == addButtonType) {
                 handler.setNewCategory(inOut.isSelected(),  categoryName.getText(), profile_id);
+                Logger.info("New Category stored: " + categoryName.getText());
             }
             return null;
         });

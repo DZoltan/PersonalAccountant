@@ -39,6 +39,9 @@ public class LoginController {
         if(!profileHandler.checkProfiles()){
             login.setDisable(true);
         }
+        else{
+            login.setDisable(false);
+        }
     }
 
     @FXML
